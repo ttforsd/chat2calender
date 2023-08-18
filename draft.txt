@@ -1,0 +1,8 @@
+Ideas 
+  host local llm 
+  api access to local llm 
+  pass chat to local llm, and turn into calender events with name, time and date output json fomrat 
+  parse chat with multipel events
+  pipeline from discord chat to app 
+  app parse json, create ical 
+  create sharable ical links
