@@ -1,0 +1,12 @@
+[{'Event_Date': '09/10', 'Event_Time': '13:00', 'Event_Name': 'Meeting with boss'}, {'Event_Date': '10/10', 'Event_Time': '13:00', 'Event_Name': 'Meeting with boss'}{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}]
+
+
+
+gpt prompt: 
+You are given text containing info about a event. Extract date of event, time of event, name of event. And output json Event arrays with names 'Event_Date', 'Event_Time', 'Event_Name'. No other output besides json. Time should be in 24-hour notation, hh:mm. Date should be dd/mm
+Example output: [{'Event_Date': '09/10', 'Event_Time': '13:00', 'Event_Name': 'Meeting with boss'}, {'Event_Date': '10/10', 'Event_Time': '13:00', 'Event_Name': 'Meeting with boss'}{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}]
+
+basketball game at 12am on 1/1, 9am on 2/1. meeting with boss at 9am on 3/3
+
+gpt output : 
+[{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '2/1', 'Event_Time': '09:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '3/3', 'Event_Time': '09:00', 'Event_Name': 'Meeting with boss'}]
