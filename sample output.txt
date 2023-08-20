@@ -10,3 +10,13 @@ basketball game at 12am on 1/1, 9am on 2/1. meeting with boss at 9am on 3/3
 
 gpt output : 
 [{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '2/1', 'Event_Time': '09:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '3/3', 'Event_Time': '09:00', 'Event_Name': 'Meeting with boss'}]
+
+
+Example 1 input: basketball game at 12am on 1/1, 11pm on 2/1. meeting with boss at 9am on 3/3
+Example 1 output:[{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '2/1', 'Event_Time': '23:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '3/3', 'Event_Time': '09:00', 'Event_Name': 'Meeting with boss'}]
+Example 2 input: Vet clinics 5/5
+Example 2 output: [{'Event_Date': '5/5', 'Event_Time': '00:00', 'Event_Name': 'Vet clinics'}]
+
+
+New prompt: 
+You are given text containing info about a event. Extract date of event, time of event, name of event. Output json and nothign else. Example 1 input: basketball game at 12am on 1/1, 11pm on 2/1. meeting with boss at 9am on 3/3; Example 1 output:[{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '2/1', 'Event_Time': '23:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '3/3', 'Event_Time': '09:00', 'Event_Name': 'Meeting with boss'}] \n Example 2 input: Vet clinics 5/5; Example 2 output: [{'Event_Date': '5/5', 'Event_Time': '00:00', 'Event_Name': 'Vet clinics'}]
