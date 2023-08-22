@@ -27,7 +27,7 @@ def get_time(HK=False):
     return date_time
 
 
-prompt1 = "You are given text containing info about a event. Extract date of event, time of event, name of event. Output json and nothing else. Example 1: Input: basketball game at 12am on 1/1, 11pm on 2/1. meeting with boss at 9am on 3/3; Output:[{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '2/1', 'Event_Time': '23:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '3/3', 'Event_Time': '09:00', 'Event_Name': 'Meeting with boss'}] \n Example 2: Input: Vet clinics 5/5; Output:[{'Event_Date': '5/5', 'Event_Time': '00:00', 'Event_Name': 'Vet clinics'}]"
+prompt1 = "You are given text containing info about a event. Extract date of event, time of event, name of event. Output json and nothing else. Example 1: Input: basketball game at 12am on 1/1, 11pm on 2/1. meeting with boss at 9am on 13 November; Output:[{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '2/1', 'Event_Time': '23:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '13/11', 'Event_Time': '09:00', 'Event_Name': 'Meeting with boss'}] \n Example 2: Input: Vet clinics 5/5; Output:[{'Event_Date': '5/5', 'Event_Time': '00:00', 'Event_Name': 'Vet clinics'}]"
 
 
 def call_llm(prompts): 
