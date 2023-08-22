@@ -27,16 +27,13 @@ def get_time(HK=False):
     return date_time
 
 
-prompt1 = "You are given text containing info about a event. Extract date of event, time of event, name of event. Output json and nothing else. Example 1: Input: basketball game at 12am on 1/1, 11pm on 2/1. meeting with boss at 9am on 13 November; Output:[{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '2/1', 'Event_Time': '23:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '13/11', 'Event_Time': '09:00', 'Event_Name': 'Meeting with boss'}] \n Example 2: Input: Vet clinics 5/5; Output:[{'Event_Date': '5/5', 'Event_Time': '00:00', 'Event_Name': 'Vet clinics'}]"
+prompt1 = "You are given text containing info about an event. Extract date of event, time of event, name of event. Output json and nothing else. Example 1: Input: For your reference, date_time_now is Saturday 19/08/2023 15:48 \n basketball game at 12am on 1/1, 11pm on 2/1. meeting with boss at 9am on 13 November; Output:[{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '2/1', 'Event_Time': '23:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '13/11', 'Event_Time': '09:00', 'Event_Name': 'Meeting with boss'}] \n Example 2: Input: For your reference, date_time_now is Saturday 19/08/2023 15:48 \n Vet clinics 5/5; Output:[{'Event_Date': '5/5', 'Event_Time': '00:00', 'Event_Name': 'Vet clinics'}\n Example 3: Input: For your reference, date_time_now is Saturday 19/08/2023 15:48 \n Yoga class tomorrow at 10pm; Output:[{'Event_Date': '20/08', 'Event_Time': '22:00', 'Event_Name': 'Yoga Class'}]"
 
 
 def call_llm(prompts): 
     base_message = {"role": "user"}
     messages = []
-    date_time = get_time()
-    date_time = f"Time now is {date_time}"
-    system_message = {"content": date_time, "role": "system"}
-    messages.append(system_message)
+    print(prompts)
     for prompt in prompts:
         holder = base_message.copy()
         holder["content"] = prompt
@@ -53,6 +50,10 @@ def call_llm(prompts):
     return r.json()
 
 def text2json(text): 
+    print(text)
+    date_time = get_time()
+    date_time = f"For your reference, date_time_now is {date_time}"
+    text = f"{date_time} \n {text}"
     print(text)
     prompts = [prompt1]
     prompts.append(text)
