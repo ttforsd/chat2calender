@@ -50,7 +50,7 @@ def call_llm(prompts):
 
 def text2json(text): 
     date_time = get_time()
-    text = f"Day, date and time Now is {date_time}. {text}"
+    text = f"Time now is {date_time}. {text}"
     print(text)
     prompts = [prompt1]
     prompts.append(text)
