@@ -33,6 +33,10 @@ prompt1 = "You are given text containing info about a event. Extract date of eve
 def call_llm(prompts): 
     base_message = {"role": "user"}
     messages = []
+    date_time = get_time()
+    date_time = f"Time now is {date_time}"
+    system_message = {"content": date_time, "role": "system"}
+    messages.append(system_message)
     for prompt in prompts:
         holder = base_message.copy()
         holder["content"] = prompt
@@ -49,8 +53,6 @@ def call_llm(prompts):
     return r.json()
 
 def text2json(text): 
-    date_time = get_time()
-    text = f"Time now is {date_time}. {text}"
     print(text)
     prompts = [prompt1]
     prompts.append(text)
