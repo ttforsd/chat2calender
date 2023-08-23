@@ -97,8 +97,13 @@ def write2gcal(event_dict):
         event = service.events().insert(calendarId=calendar_id, body=event_dict).execute()
         print('Event created: %s' % (event.get('htmlLink')))
         dt = event.get('start').get('dateTime')
-        dt = datetime.datetime.fromisoformat(dt)
-        dt = dt.strftime("%A %d/%m/%Y %H:%M")
+        if dt != None: 
+            dt = datetime.datetime.fromisoformat(dt)
+            dt = dt.strftime("%A %d/%m/%Y %H:%M")
+        else: 
+            dt = event.get('start').get('date')
+            dt = datetime.datetime.fromisoformat(dt)
+            dt = dt.strftime("%A %d/%m/%Y")
         return f"Event: {event.get('summary')} on {dt}. Link: {event.get('htmlLink')}"
 
     except HttpError as error:
@@ -144,14 +149,19 @@ def parse_event(event, nothk=True):
 
 def start_end_time(date,time): 
     # return endtime = starttime + 1 hour, return list of dictionary of start and end time
+    all_day = time == "00:00"
     start = parse_datetime(date, time)
     # convert start to datetime object
     start = datetime.datetime.strptime(start, "%Y-%m-%dT%H:%M:%S")
     end = start + datetime.timedelta(hours=1)
     start = start.isoformat()
     end = end.isoformat()
-    start = {'start': {'dateTime': start}}
-    end = {'end': {'dateTime': end}}
+    if not all_day:
+        start = {'start': {'dateTime': start}}
+        end = {'end': {'dateTime': end}}
+    else: 
+        start = {'start': {'date': start[:10]}}
+        end = {'end': {'date': end[:10]}}
     return [start, end]
 
 def parse_datetime(date, time): 
