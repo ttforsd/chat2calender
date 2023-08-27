@@ -72,27 +72,6 @@ async def on_message(message):
 async def ping(ctx):
     await ctx.send("Pong!")
 
-async def msg2json(message): 
-    print(message)
-    msg = message.content
-    # get global name of message author
-    author = message.author.global_name
-    if author == "thomas" or author == "ytluver": 
-        me = True 
-    else: 
-        me == False
-    
-    cal_json = text2json(msg)
-    await message.channel.send(f"Here are the events {cal_json}, now adding to google calender...")
-    for event in cal_json:
-        tmp = event["Event_Name"]
-        if me: 
-            event["Event_Name"] = "tyc: " + tmp
-        else:
-            event["Event_Name"] = "lyw: " + tmp
-        # pass cal_json to ical main
-        cal_log = main(cal_json)
-        await message.channel.send(cal_log)
 
 async def wrapper(a): 
     return long_wait(a)
