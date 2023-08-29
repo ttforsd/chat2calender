@@ -15,6 +15,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 prefix = "!"  # Change this to your preferred command prefix
 bot = commands.Bot(command_prefix=prefix, intents = intents)
+special_command = os.getenv("COMMAND_1")
 
 async def llm_wrapper(message):
     loop = asyncio.get_event_loop()
@@ -44,6 +45,11 @@ async def on_message(message):
         # Handle commands here if you want
         await bot.process_commands(message)
     else:
+        # default(false) individual event
+        switch = False
+        if special_command== message.content[:6]:
+            switch = True
+            message.content = message.content[6:]
         await message.channel.send(f"Processing '{message.content}' to make calender event!")
         task_1 = asyncio.create_task(llm_wrapper(message.content))
         response_1 = await task_1
@@ -51,6 +57,8 @@ async def on_message(message):
         author = message.author.global_name
         if author == os.getenv("DISCORD_NAME_0") or author == os.getenv("DISCORD_NAME_1"):
             me = True 
+            if switch == True: 
+                me = False
         else: 
             me = False
         for event in response_1:
