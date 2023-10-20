@@ -26,38 +26,41 @@ def get_time(HK=False):
     date_time = datetime.now(tz).strftime("%A %d/%m/%Y %H:%M")
     return date_time
 
+def read_prompt(): 
+    with open("prompt.txt", "r") as f:
+        return f.read()
 
-prompt1 = "You are given text containing info about an event. Extract date of event, time of event, name of event. Output json and nothing else. Example 1: Input: For your reference, date_time_now is Saturday 19/08/2023 15:48 \n basketball game at 12am on 1/1, 11pm on 2/1. meeting with boss at 9am on 13 November; Output:[{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '2/1', 'Event_Time': '23:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '13/11', 'Event_Time': '09:00', 'Event_Name': 'Meeting with boss'}] \n Example 2: Input: For your reference, date_time_now is Saturday 19/08/2023 15:48 \n Vet clinics 5/5; Output:[{'Event_Date': '5/5', 'Event_Time': '00:00', 'Event_Name': 'Vet clinics'}\n Example 3: Input: For your reference, date_time_now is Saturday 19/08/2023 15:48 \n Yoga class tomorrow at 10pm; Output:[{'Event_Date': '20/08', 'Event_Time': '22:00', 'Event_Name': 'Yoga Class'}]"
 
 
-def call_llm(prompts): 
-    base_message = {"role": "user"}
-    messages = []
-    print(prompts)
-    for prompt in prompts:
-        holder = base_message.copy()
-        holder["content"] = prompt
-        messages.append(holder)
 
-    data = {
-        "messages": messages,
-        "max_tokens": 1024,
-        "temperature": 0.1,
-    }
+def call_llm(data): 
+    print(data)
     print(data)
     r = requests.post(chat_url, json=data)
     print(f"Raw output: {r.text}")
     return r.json()
 
-def text2json(text): 
+def text2request(text): 
     print(text)
     date_time = get_time()
     date_time = f"For your reference, date_time_now is {date_time}"
-    text = f"{date_time} \n {text}"
+    text = f"{date_time} Prompt: {text}"
     print(text)
-    prompts = [prompt1]
-    prompts.append(text)
-    cal_json = call_llm(prompts)
+    prompt1 = read_prompt()
+    prompt1 += text
+    print(prompt1)
+    # prompt1 to json format for llm 
+    llm_request = {} 
+    llm_request["messages"] = [{"role": "user", "content": prompt1}, {"role": "system", "content": "You ONLY return JSON, NOTHING ELSE"}]
+    llm_request["max_tokens"] = 1024
+    llm_request["temperature"] = 0.1
+    print(llm_request)
+    return llm_request
+
+
+def text2json(text): 
+    llm_request = text2request(text)
+    cal_json = call_llm(llm_request)
     cal_json = cal_json['choices'][0]['message']['content']
     cal_json = extracter(cal_json)
     cal_json = json.loads(cal_json)

@@ -1,0 +1,15 @@
+You are given text containing info about an event. Extract date of event, time of event, name of event. Output json and nothing else. 
+
+Here are some examples 
+
+Example 1: 
+Input: For your reference, date_time_now is Saturday 19/08/2023 15:48. Prompt: basketball game at 12am on 1/1, 11pm on 2/1. meeting with boss at 9am on 13 November
+Output:[{'Event_Date': '1/1', 'Event_Time': '00:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '2/1', 'Event_Time': '23:00', 'Event_Name': 'Basketball game'}, {'Event_Date': '13/11', 'Event_Time': '09:00', 'Event_Name': 'Meeting with boss'}]
+
+
+Example 2: 
+Input: For your reference, date_time_now is Saturday 19/08/2023 15:48. Prompt: Vet clinics 5/5
+Output:[{'Event_Date': '5/5', 'Event_Time': '00:00', 'Event_Name': 'Vet clinics'}\n Example 3: Input: For your reference, date_time_now is Saturday 19/08/2023 15:48 \n Yoga class tomorrow at 10pm; Output:[{'Event_Date': '20/08', 'Event_Time': '22:00', 'Event_Name': 'Yoga Class'}]
+
+
+Below is the prompt for you to analyse: 
