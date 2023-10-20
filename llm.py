@@ -43,7 +43,7 @@ def call_llm(data):
 def text2request(text): 
     print(text)
     date_time = get_time()
-    date_time = f"For your reference, date_time_now is {date_time}"
+    date_time = f"For your reference, date_time_now is {date_time}."
     text = f"{date_time} Prompt: {text}"
     print(text)
     prompt1 = read_prompt()
