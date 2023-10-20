@@ -1,4 +1,4 @@
-You are given text containing info about an event. Extract date of event, time of event, name of event. Output json and nothing else. 
+You are given text containing info about an event. Extract date of event, time of event, name of event. Output json and nothing else. ENCLOSE THE OUTPUT IN [] 
 
 Here are some examples 
 
