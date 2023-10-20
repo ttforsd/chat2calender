@@ -5,4 +5,5 @@ services:
     container_name: disbot
     restart: unless-stopped
     image: disbot
-    
+    environment:
+      - PYTHONUNBUFFERED=1
