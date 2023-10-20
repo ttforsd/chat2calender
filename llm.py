@@ -78,6 +78,7 @@ def extracter(s):
             s = s[i:]
             break 
     s = s.replace("'", '"')
+    s = s.replace("},]", "}]")
     return s
 
         
