@@ -71,6 +71,7 @@ def text2json(text):
 
 
 def extracter(s): 
+    s = s.replace("\n", "")
     pattern = "[{"
     for i in range(len(s) -1):
         if s[i:i+2] == pattern: 
